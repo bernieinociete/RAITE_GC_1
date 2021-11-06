@@ -2,7 +2,7 @@
     <div class="header">
         <img src="assets/templogo.png" class="templogo">
 
-        <button mat-button class="logout-btn" color="primary" (click) = "openDialog('logout')">Logout</button>
+        <button mat-button class="logout-btn" color="primary" (click) = "openDialog('logout', null)">Logout</button>
 
     </div>
 
@@ -11,7 +11,8 @@
             <div class="select-cat" >
                 <mat-form-field appearance="fill">
                     <mat-label>Select category</mat-label>
-                    <mat-select [(value)]="selected">
+                    <mat-select (selectionChange)="productByCategory()" [(value)]="selected">
+                        <mat-option value="All Products">All Products</mat-option>
                         <mat-option value="Fruit">Fruit</mat-option>
                         <mat-option value="Vegetable">Vegetable</mat-option>
                         <mat-option value="Bread">Bread</mat-option>
@@ -28,12 +29,10 @@
                 <h1 class="category-label"><strong>{{selected}}</strong></h1>
 
                 <mat-grid-list  cols="5" rowHeight="1:1">  
-                    <mat-grid-tile *ngFor = "let items of [1,2,3,4,5,6] ">
-                        <mat-card (click)="openDialog('item')" class="categ">
-                            <img src="assets/category/defaultproductphoto.png" class="logo">
-                            <p>Product 1</p>
-
-                            
+                    <mat-grid-tile *ngFor = "let product of product_data">
+                        <mat-card (click)="openDialog('item', product)" class="categ">
+                            <img src="{{product.product_image}}" class="logo">
+                            <p>{{product.product_name}}</p>
                         </mat-card>
                     </mat-grid-tile>
                 </mat-grid-list>

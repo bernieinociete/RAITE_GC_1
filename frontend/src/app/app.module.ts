@@ -47,7 +47,6 @@ import {MatIconModule} from '@angular/material/icon';
     MatDividerModule,
     MatSelectModule,
     MatIconModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

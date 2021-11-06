@@ -37,6 +37,13 @@
 				}
 			}
 
+			if($table == 'productByCategory') {
+				$this->sql = "SELECT * FROM tbl_product";
+				if($filter_data != null) {
+					$this->sql .= " WHERE product_category = '$filter_data'";
+				}
+			}
+
 			$data = array(); $code = 0; $msg= ""; $remarks = "";
 			try {
 				if ($res = $this->pdo->query($this->sql)->fetchAll()) {

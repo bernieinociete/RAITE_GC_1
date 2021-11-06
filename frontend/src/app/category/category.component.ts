@@ -15,31 +15,48 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.pullCart()
     this.pullOrder()
+    this.pullProducts()
   }
 
   pullCart() {
     let id = window.sessionStorage.getItem('user_id')
     this._ds.sendApiRequest2('cart/' + id).subscribe((data: {payload: any}) => {
-      console.log(data.payload)
     })
   }
 
   pullOrder() {
     let id = window.sessionStorage.getItem('user_id')
     this._ds.sendApiRequest2('order/' + id).subscribe((data: {payload: any}) => {
-      console.log(data.payload)
     })
   }
   
-  selected = 'Fruit';
+  product_data: any[] = []
+  pullProducts() {
+    this._ds.sendApiRequest2('product/').subscribe((data: {payload: any}) => {
+      this.product_data = data.payload
+    })
+  }
+  
+  selected: any = 'All Products';
+  productByCategory() {
+    let filter_data
+    if(this.selected == 'All Products') {
+      filter_data = ''
+    }
+
+    this._ds.sendApiRequest2('productByCategory/' + filter_data).subscribe((data: {payload: any}) => {
+      this.product_data = data.payload
+    })
+  }
   
   
-  openDialog(option:any){
+  openDialog(option:any, product: any){
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      option: option
+      option: option,
+      product_data: product
     }
     
     dialogConfig.maxWidth = '33%';

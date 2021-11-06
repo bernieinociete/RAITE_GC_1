@@ -46,16 +46,16 @@
     </div>
 
     <div *ngIf="data.option == 'item'">
-        <img src="assets/category/defaultproductphoto.png" class="item">
-        <h3>Product 1</h3>
-        <h3><b>Price</b></h3>
+        <img src="{{data.product_data.product_image}}" class="item">
+        <h3>{{data.product_data.product_name}}</h3>
+        <h3><b>₱ {{data.product_data.product_price}}</b></h3>
         <br>
 
-        <p>Lorem Lorem Lorem Lorem</p>
+        <p>{{data.product_data.product_desc}}</p>
 
-        <button mat-button class="add-btn" color="primary">Add to Cart</button>
+        <button (click)="addToCart(data.product_data.product_id)" mat-button class="add-btn" color="primary">Add to Cart</button>
 
-        <button mat-button class="add-btn" color="primary">Cancel</button>
+        <button (click)="closeDialog()" mat-button class="add-btn" color="primary">Cancel</button>
     </div>
 
     

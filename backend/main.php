@@ -80,6 +80,14 @@
 						echo json_encode($gm->exec_query($req[0], null));
 					}
 				break;
+
+				case 'productByCategory':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
+				break;
 				// PRODUCT
 
 				// CART

@@ -13,7 +13,6 @@ export class DialogsComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogReg: MatDialogRef<DialogsComponent>, public  router: Router, private _ds: DataService, public _dialog: MatDialog,) { }
 
   ngOnInit(): void {
-
   }
 
   user_fname: any
@@ -40,7 +39,24 @@ export class DialogsComponent implements OnInit {
   }
 
   logout(){
+    window.sessionStorage.clear()
     this.router.navigate(['login']);
+  }
+
+  cart_data: any = {}
+  addToCart(product_id: any) {
+    let id = window.sessionStorage.getItem('user_id')
+    
+    this.cart_data.product_id = product_id
+    this.cart_data.user_id = id
+
+    this._ds.sendApiRequest('addToCart/', this.cart_data).subscribe((data: {payload: any}) =>{
+      this._dialog.closeAll()
+    })
+  }
+
+  closeDialog() {
+    this._dialog.closeAll()
   }
 
 }
