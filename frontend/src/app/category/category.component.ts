@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DialogsComponent } from '../dialogs/dialogs.component';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
+import { Subscription } from 'rxjs';
 
 export interface PeriodicElement {
   name: string;
@@ -30,7 +31,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class CategoryComponent implements OnInit {
 
-  constructor(private _ds: DataService, public dialog: MatDialog) { }
+  message: any
+  private subs!: Subscription
+
+  constructor(private _ds: DataService, public dialog: MatDialog) { 
+    this.subs = this._ds.getUpdate().subscribe(message => {
+      this.message = this.message
+      this.pullCart()
+    })
+  }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
@@ -41,9 +50,21 @@ export class CategoryComponent implements OnInit {
     this.pullProducts()
   }
 
+  ngOnDestroy() {
+    this.subs.unsubscribe()
+  }
+
+
+  sendMessage() {
+    this._ds.sendUpdate('Message Update!')
+  }
+
+  cart_data: any[] = []
   pullCart() {
     let id = window.sessionStorage.getItem('user_id')
     this._ds.sendApiRequest2('cart/' + id).subscribe((data: {payload: any}) => {
+      this.cart_data = data.payload
+      console.log(this.cart_data)
     })
   }
 
@@ -65,10 +86,44 @@ export class CategoryComponent implements OnInit {
     let filter_data
     if(this.selected == 'All Products') {
       filter_data = ''
+    } else {
+      filter_data = this.selected
     }
 
     this._ds.sendApiRequest2('productByCategory/' + filter_data).subscribe((data: {payload: any}) => {
       this.product_data = data.payload
+    })
+  }
+
+  cart_info: any = {}
+  addQuantity(cart: any) {
+    this.cart_info = {}
+    this.cart_info.cart_quantity = cart.cart_quantity + 1
+
+    if(cart.cart_quantity < cart.product_quantity) {
+      this._ds.sendApiRequest('editQuantity/' + cart.cart_id, this.cart_info).subscribe((data: {payload: any}) =>{
+        this.sendMessage()
+      })
+    }
+  }
+
+  subtractQuantity(cart: any) {
+    this.cart_info = {}
+    this.cart_info.cart_quantity = cart.cart_quantity - 1
+
+    if(cart.cart_quantity != 1) {
+      this._ds.sendApiRequest('editQuantity/' + cart.cart_id, this.cart_info).subscribe((data: {payload: any}) =>{
+        this.sendMessage()
+      })
+    }
+  }
+
+  removeCart(cart: any) {
+    this.cart_info = {}
+    this.cart_info.cart_status = 0
+
+    this._ds.sendApiRequest('editQuantity/' + cart.cart_id, this.cart_info).subscribe((data: {payload: any}) =>{
+      this.sendMessage()
     })
   }
   

@@ -39,21 +39,18 @@
         </mat-tab>
 
         <mat-tab label="Cart">
-
-            <button mat-button class="checkout-btn" color="primary" (click)= "openDialog('checkout', null)">Check Out</button>
-
-            <mat-grid-list  cols="5" rowHeight="1:1">  
-                <mat-grid-tile *ngFor = "let items of [1,2,3,4,5,6] ">
+            <mat-grid-list cols="5" rowHeight="1:1">  
+                <mat-grid-tile *ngFor = "let cart of cart_data ">
                     <mat-card class="categ">
-                        <img src="assets/category/defaultproductphoto.png" class="logo">
-                        <p><strong>Product 1</strong></p>
-                        <p>Quantity | Total Price</p>
+                        <img src="{{cart.product_image}}" class="logo">
+                        <p><strong>{{cart.product_name}}</strong></p>
+                        <p>{{cart.cart_quantity}} | {{cart.cart_quantity * cart.product_price}} </p>
 
-                        <button mat-button class="add-btn" color="white">	<mat-icon>add</mat-icon></button>
+                        <button mat-button class="add-btn" (click)="addQuantity(cart)" color="white"><mat-icon>add</mat-icon></button>
 
-                        <button mat-button class="add-btn" color="white"><mat-icon>remove</mat-icon></button>
+                        <button mat-button class="add-btn" (click)="subtractQuantity(cart)" color="white"><mat-icon>remove</mat-icon></button>
 
-                        <button mat-button class="add-btn" color="warn"><mat-icon>delete</mat-icon></button>
+                        <button mat-button class="add-btn" (click)="removeCart(cart)" color="warn"><mat-icon>delete</mat-icon></button>
                     </mat-card>
                 </mat-grid-tile>
             </mat-grid-list>

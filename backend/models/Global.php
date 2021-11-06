@@ -24,6 +24,7 @@
 			}
 
 			if($table == 'cart') {
+				$this->sql .= " LEFT JOIN tbl_product ON tbl_product.product_id = tbl_cart.product_id";
 				if($filter_data != null) {
 					$this->sql .= " WHERE cart_status = 1 AND user_id = $filter_data";
 				}

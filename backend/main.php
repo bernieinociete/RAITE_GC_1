@@ -32,17 +32,17 @@
 				// CART
 				case 'addToCart':
 					$d = json_decode(file_get_contents("php://input"));
-					echo json_encode($gm->insert('tbl_cart', $d));
+					echo json_encode($gm->insert("tbl_cart", $d));
 				break;
 
-				case 'addQuantity':
+				case 'editQuantity':
 					$d = json_decode(file_get_contents("php://input"));
-					echo json_encode($gm->update('tbl_cart', $d, "cart_id = $req[1]"));
+					echo json_encode($gm->update("tbl_cart", $d, "cart_id = $req[1]"));
 				break;
 
-				case 'subtractQuantity':
+				case 'removeCart':
 					$d = json_decode(file_get_contents("php://input"));
-					echo json_encode($gm->update('tbl_cart', $d, "cart_id = $req[1]"));
+					echo json_encode($gm->update("tbl_cart", $d, "cart_id = $req[1]"));
 				break;
 				// CART
 
