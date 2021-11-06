@@ -63,23 +63,21 @@
 		}
 
 		function login($dt){
-			 
 			$code = 403; 
 			$msg = ""; 
 			$remarks = "";
 			$payload = "";
 
-			$this->sql="SELECT * FROM tbl_account WHERE account_username='$dt->account_username' LIMIT 1";
+			$this->sql="SELECT * FROM tbl_user WHERE user_username='$dt->user_username' LIMIT 1";
 
 			try {
 				if ($res = $this->pdo->query($this->sql)->fetchColumn()>0) {
 					$result=$this->pdo->query($this->sql)->fetchAll();
 
 					foreach ($result as $rec) { 
-						if($this->pwordCheck($dt->account_password, $rec['account_password'])){
-							$fn = $rec['account_username'];
-
-							$payload = array("username"=>$fn);
+						if($this->pwordCheck($dt->user_password, $rec['user_password'])){
+							$id = $rec['user_id'];
+							$payload = array("id"=>$id);
 							$code = 200; 
 							$msg = "Logged in successfully"; 
 							$remarks = "success";
@@ -112,8 +110,8 @@
 			$data = array(); $code = 0; $msg = ""; $remarks = "";
 
 			try {
-				$sqlstr = "INSERT INTO tbl_user (user_lname, user_fname, user_email, user_pword, user_otp, user_createdAt, user_updatedAt) 
-					VALUES ('$dt->user_lname', '$dt->user_fname', '$dt->user_email', '$encryptedPassword', '$otp', NOW(), NOW())";
+				$sqlstr = "INSERT INTO tbl_user (user_lname, user_mname, user_fname, user_username, user_email, user_password, user_createdAt, user_updatedAt) 
+					VALUES ('$dt->user_lname', '$dt->user_mname', '$dt->user_fname', '$dt->user_username', '$dt->user_email', '$encryptedPassword', NOW(), NOW())";
 					
 				if($this->pdo->query($sqlstr)) {
 					$data = $dt->user_email; $code = 200; $msg = "Successfully retrieved the requested records"; $remarks = "success";

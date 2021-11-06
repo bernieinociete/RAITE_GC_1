@@ -8,6 +8,21 @@
 
 		// SELECT
 		public function exec_query($table, $filter_data) {
+
+			$this->sql = "SELECT * FROM tbl_$table";
+
+			if($table == 'user') {
+				if($filter_data != null) {
+					$this->sql .= " WHERE user_id = $filter_data";
+				}
+			}
+
+			if($table == 'product') {
+				if($filter_data != null) {
+					$this->sql .= " WHERE product_id = $filter_data";
+				}
+			}
+
 			$data = array(); $code = 0; $msg= ""; $remarks = "";
 			try {
 				if ($res = $this->pdo->query($this->sql)->fetchAll()) {
@@ -28,7 +43,19 @@
 				array_push($values, $value);
 			}
 			try {
+				$ctr = 0;
+				$sqlstr="INSERT INTO $table (";
+				foreach ($fields as $value) {
+					$sqlstr .= $value; $ctr++;
+					if($ctr<count($fields)) {
+						$sqlstr .=", ";
+					}
+				}
+				
+				$sqlstr .= ") VALUES (".str_repeat("?, ", count($values)-1)."?)";
 
+				$sql = $this->pdo->prepare($sqlstr);
+				$sql->execute($values);
 				return array("code"=>200, "remarks"=>"success");
 			} catch (\PDOException $e) {
 				$errmsg = $e->getMessage();
@@ -45,6 +72,18 @@
 				array_push($values, $value);
 			}
 			try{
+				$ctr = 0;	
+				$sqlstr="UPDATE $table SET ";
+				foreach($data as $key => $value) {
+					$sqlstr .="$key=?"; $ctr++;
+					if($ctr < count($fields)) {
+						$sqlstr.=", ";
+					}
+				}
+
+				$sqlstr .= " WHERE ".$conditionStringPassed;
+				$sql = $this->pdo->prepare($sqlstr);
+				$sql->execute($values);
 				return array("code"=>200, "remarks"=>"success");	
 			}
 			catch(\PDOException $e){

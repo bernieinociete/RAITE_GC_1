@@ -3,17 +3,18 @@
         <img src="assets/templogo.png" class="logo">
         <h3>Your convenience starts here</h3>
 
-        <mat-form-field class="full-width" ppearance="fill">
-            <mat-label>Username</mat-label>
-            <input matInput>
-        </mat-form-field>
+        <form (submit)="login()">
+            <mat-form-field class="full-width" ppearance="fill">
+                <mat-label>Username</mat-label>
+                <input [(ngModel)]="user_username" name="user_username" matInput>
+            </mat-form-field>
 
-        <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Password</mat-label>
-            <input matInput>
-        </mat-form-field>
-
-        <button mat-button class="full-width login-btn" color="primary">Login</button>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input type="password" [(ngModel)]="user_password" name="user_password" matInput>
+            </mat-form-field>
+            <button type="submit" mat-button class="full-width login-btn" color="primary">Login</button>
+        </form>
 
         <button mat-button class="full-width reg-btn" (click)="openDialog()" color="primary">Register</button>
 

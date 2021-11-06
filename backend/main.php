@@ -17,10 +17,41 @@
 	switch($_SERVER['REQUEST_METHOD']) {
 		case 'POST':
 			switch($req[0]) {
+				// AUTH
 				case 'login':
-					$d = json_decode(base64_decode(file_get_contents("php://input")));
+					$d = json_decode(file_get_contents("php://input"));
 					echo json_encode($auth->login($d));
 				break;
+
+				case 'register':
+					$d = json_decode(file_get_contents("php://input"));
+					echo json_encode($auth->register($d));
+				break;
+				// AUTH
+
+				// CART
+				case 'addToCart':
+					$d = json_decode(file_get_contents("php://input"));
+					echo json_encode($gm->insert('tbl_cart', $d));
+				break;
+
+				case 'addQuantity':
+					$d = json_decode(file_get_contents("php://input"));
+					echo json_encode($gm->update('tbl_cart', $d, "cart_id = $req[1]"));
+				break;
+
+				case 'subtractQuantity':
+					$d = json_decode(file_get_contents("php://input"));
+					echo json_encode($gm->update('tbl_cart', $d, "cart_id = $req[1]"));
+				break;
+				// CART
+
+				// ORDER
+				case 'placeOrder':
+					$d = json_decode(file_get_contents("php://input"));
+					echo json_encode($post->placeOrder($d));
+				break;
+				// ORDER
 
 				default:
 					http_response_code(400);
@@ -31,6 +62,26 @@
 
 		case 'GET':
 			switch ($req[0]) {
+				// USER 
+				case 'user':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
+				break;
+				// USER
+
+				// PRODUCT 
+				case 'product':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
+				break;
+				// PRODUCT
+
 				default:
 				http_response_code(400);
 				echo "Bad Request";

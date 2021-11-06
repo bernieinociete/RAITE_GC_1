@@ -9,7 +9,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = "http://localhost/RAITE_GC_1/backend/"
+  baseUrl = "http://localhost/raite_gc_team1/backend/"
 
   private subject = new Subject<any>()
 
@@ -29,7 +29,7 @@ export class DataService {
 
   sendApiRequest(method: any, data: any) {
     return <any>(
-      this.http.post(this.baseUrl + method, btoa(JSON.stringify(data)))
+      this.http.post(this.baseUrl + method, JSON.stringify(data))
     )
   }
 }
