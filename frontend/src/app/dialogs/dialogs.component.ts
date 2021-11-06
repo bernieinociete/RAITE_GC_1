@@ -23,6 +23,7 @@ export class DialogsComponent implements OnInit {
   user_email: any
   user_phone: any
   user_data: any = {}
+  selected = 'name';
 
   register() {
     this.user_data.user_fname = this.user_fname

@@ -56,7 +56,59 @@
             </mat-grid-list>
         </mat-tab>
 
-        <mat-tab label="Profile"> Content 2 </mat-tab>
+        <mat-tab label="Profile"> 
+
+            <button mat-button class="checkout-btn" color="primary" (click)= "openDialog('edit', null)">Edit</button>
+
+            <mat-grid-list  cols="5" rowHeight="1:1">  
+                <mat-grid-tile>
+                    <mat-card class="categ">
+    
+                        <p><strong>Name</strong></p>
+                        <p>Juan Dela Cruz</p>
+
+                    </mat-card>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-card class="categ">
+    
+                        <p><strong>Username</strong></p>
+                        <p>juandelacruz</p>
+
+                    </mat-card>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-card class="categ">
+    
+                        <p><strong>Address</strong></p>
+                        <p>West Tapinac, Olongapo City</p>
+
+                    </mat-card>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-card class="categ">
+    
+                        <p><strong>Email Address</strong></p>
+                        <p>juandelacruz@gmail.com</p>
+
+                    </mat-card>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-card class="categ">
+    
+                        <p><strong>Contact Number</strong></p>
+                        <p>099999999999</p>
+
+                    </mat-card>
+                </mat-grid-tile>
+            </mat-grid-list>
+        
+        
+        </mat-tab>
 
         <mat-tab label="Orders"> 
 
