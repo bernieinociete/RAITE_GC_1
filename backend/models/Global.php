@@ -8,36 +8,6 @@
 
 		// SELECT
 		public function exec_query($table, $filter_data) {
-
-			$this->sql = "SELECT * FROM tbl_$table";
-
-			if($table == "ship_speed") {
-				if($filter_data != null) {
-					$this->sql .= " WHERE ship_speed_id=$filter_data";
-				}
-			}
-
-			if($table == "ship") {
-				$this->sql .= " LEFT JOIN tbl_ship_speed ON tbl_ship_speed.ship_speed_id = tbl_ship.ship_speed_id WHERE tbl_ship.ship_status = 1";
-				if($filter_data != null) {
-					$this->sql .= " AND ship_id=$filter_data";
-				}
-			}
-
-			if($table == "crew") {
-				$this->sql .= " LEFT JOIN tbl_rank ON tbl_rank.rank_id = tbl_crew.rank_id
-				LEFT JOIN tbl_ship ON tbl_ship.ship_id = tbl_crew.ship_id WHERE tbl_crew.crew_status = 1" ;
-				if($filter_data != null) {
-					$this->sql .= " AND crew_id=$filter_data";
-				}
-			}
-
-			if($table == "rank") {
-				if($filter_data != null) {
-					$this->sql .= " WHERE rank_id=$filter_data";
-				}
-			}
-
 			$data = array(); $code = 0; $msg= ""; $remarks = "";
 			try {
 				if ($res = $this->pdo->query($this->sql)->fetchAll()) {
@@ -58,18 +28,7 @@
 				array_push($values, $value);
 			}
 			try {
-				$ctr = 0;
-				$sqlstr="INSERT INTO $table (";
-				foreach ($fields as $value) {
-					$sqlstr.=$value; $ctr++;
-					if($ctr<count($fields)) {
-						$sqlstr.=", ";
-					} 	
-				} 
-				$sqlstr.=") VALUES (".str_repeat("?, ", count($values)-1)."?)";
 
-				$sql = $this->pdo->prepare($sqlstr);
-				$sql->execute($values);
 				return array("code"=>200, "remarks"=>"success");
 			} catch (\PDOException $e) {
 				$errmsg = $e->getMessage();
@@ -86,17 +45,6 @@
 				array_push($values, $value);
 			}
 			try{
-				$ctr = 0;
-				$sqlstr = "UPDATE $table SET ";
-					foreach ($data as $key => $value) {
-						$sqlstr .="$key=?"; $ctr++;
-						if($ctr<count($fields)){
-							$sqlstr.=", ";
-						}
-					}
-					$sqlstr .= " WHERE ".$conditionStringPassed;
-					$sql = $this->pdo->prepare($sqlstr);
-					$sql->execute($values);
 				return array("code"=>200, "remarks"=>"success");	
 			}
 			catch(\PDOException $e){
