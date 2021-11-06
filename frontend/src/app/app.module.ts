@@ -14,12 +14,16 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogsComponent } from './dialogs/dialogs.component';
+import { CategoryComponent } from './category/category.component';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DialogsComponent
+    DialogsComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,8 @@ import { DialogsComponent } from './dialogs/dialogs.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
