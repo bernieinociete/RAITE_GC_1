@@ -101,8 +101,14 @@ export class DialogsComponent implements OnInit {
         this._snackBar.open("Successfully check out. Please check your orders" , '', {
           duration: 2000
         });
-      })
+      },)
+    }else{
+      this._snackBar.open("Please check your cart" , '', {
+        duration: 2000
+      }
+      )
     }
+    
   }
 
   cart_clear: any = {}
