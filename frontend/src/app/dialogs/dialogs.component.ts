@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialogs',
@@ -9,7 +10,7 @@ import { DataService } from '../services/data.service';
 })
 export class DialogsComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogReg: MatDialogRef<DialogsComponent>, private _ds: DataService, public _dialog: MatDialog,) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogReg: MatDialogRef<DialogsComponent>, public  router: Router, private _ds: DataService, public _dialog: MatDialog,) { }
 
   ngOnInit(): void {
 
@@ -36,6 +37,10 @@ export class DialogsComponent implements OnInit {
     this._ds.sendApiRequest('register/', this.user_data).subscribe((data: {payload: any}) =>{
       this._dialog.closeAll()
     })
+  }
+
+  logout(){
+    this.router.navigate(['login']);
   }
 
 }
