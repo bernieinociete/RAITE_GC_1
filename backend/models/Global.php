@@ -23,6 +23,20 @@
 				}
 			}
 
+			if($table == 'cart') {
+				if($filter_data != null) {
+					$this->sql .= " WHERE cart_status = 1 AND user_id = $filter_data";
+				}
+			}
+
+			if($table == 'order') {
+				$this->sql .= " LEFT JOIN tbl_order_item ON tbl_order_item.order_id = tbl_order.order_id
+				LEFT JOIN tbl_product ON tbl_product.product_id = tbl_order_item.product_id";
+				if($filter_data != null) {
+					$this->sql .= " WHERE tbl_order.user_id = $filter_data";
+				}
+			}
+
 			$data = array(); $code = 0; $msg= ""; $remarks = "";
 			try {
 				if ($res = $this->pdo->query($this->sql)->fetchAll()) {

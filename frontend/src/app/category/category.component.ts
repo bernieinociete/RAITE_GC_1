@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogsComponent } from '../dialogs/dialogs.component';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-category',
@@ -9,9 +10,25 @@ import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angula
 })
 export class CategoryComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private _ds: DataService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.pullCart()
+    this.pullOrder()
+  }
+
+  pullCart() {
+    let id = window.sessionStorage.getItem('user_id')
+    this._ds.sendApiRequest2('cart/' + id).subscribe((data: {payload: any}) => {
+      console.log(data.payload)
+    })
+  }
+
+  pullOrder() {
+    let id = window.sessionStorage.getItem('user_id')
+    this._ds.sendApiRequest2('order/' + id).subscribe((data: {payload: any}) => {
+      console.log(data.payload)
+    })
   }
   
   selected = 'Fruit';

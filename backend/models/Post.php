@@ -19,14 +19,15 @@
 					$order_item_quantity = [];
 					$value = [];
 
-					for($i = 0; i < sizeof($data->product_id); $i++) {
+					for($i = 0; $i < sizeof($data->product_id); $i++) {
 						$product_id[] = $data->product_id[$i];
 						$order_id[] = $id;
 						$order_item_quantity[] = $data->order_item_quantity[$i];
 						$value[] = "($product_id[$i], $order_id[$i], $order_item_quantity[$i])";
 					}
 
-					return implode(', ', $value);
+					$this->sql = "INSERT INTO tbl_order_item (product_id, order_id, order_item_quantity) VALUES " . implode(', ', $value);
+					$this->pdo->query($this->sql);
 				}
 
 				return array("code"=>200, "remarks"=>"success");
