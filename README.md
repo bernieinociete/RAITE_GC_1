@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Overview
 
-Title: Go-Cery: An Web-based Online Grocery Application using AngularJs and PhP
+Title: Go-Cery: An Web-based Online Grocery Application using Angular and PhP
 
 Problems to solve:
 
@@ -14,7 +14,7 @@ Problems to solve:
 
 Goal and Description: 
 
-    Find the groceries you need, and have them delivered directly to you — GoCery gives you the definitive mobile grocery shopping experience. All you need to do is register once to the app, select the products you want, add them to your personal shopping cart and pick up your orders right at your doors and pay. The groceryproduct-centric nature of GoCery ensures that you can avail more available products at lower prices. It's that easy, GoCery perfectly emulates the traditional grocery experience by bringing the items you need right in the palm of your hands
+    Find the groceries you need, and have them delivered directly to you — GoCery gives you the definitive webapp grocery shopping experience. All you need to do is register once to the app, select the products you want, add them to your personal shopping cart and pick up your orders right at your doors and pay. The groceryproduct-centric nature of GoCery ensures that you can avail more available products at lower prices. It's that easy, GoCery perfectly emulates the traditional grocery experience by bringing the items you need right in the palm of your hands
 
     -Easy grocery shopping, shop from the convenience of your home.
 
