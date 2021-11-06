@@ -9,6 +9,7 @@
     <mat-tab-group>
         <mat-tab label="Items">
             <div class="select-cat" >
+
                 <mat-form-field appearance="fill">
                     <mat-label>Select category</mat-label>
                     <mat-select (selectionChange)="productByCategory()" [(value)]="selected">
@@ -39,6 +40,7 @@
         </mat-tab>
 
         <mat-tab label="Cart">
+            <button mat-button class="checkout-btn" color="primary" (click)= "openDialog('checkout', null)">Check out</button> 
             <mat-grid-list cols="5" rowHeight="1:1">  
                 <mat-grid-tile *ngFor = "let cart of cart_data ">
                     <mat-card class="categ">
