@@ -16,7 +16,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogsComponent } from './dialogs/dialogs.component';
 import { CategoryComponent } from './category/category.component';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,12 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatDividerModule,
+    MatSelectModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
