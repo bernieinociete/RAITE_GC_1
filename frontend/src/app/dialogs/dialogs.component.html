@@ -62,9 +62,17 @@
     <div *ngIf="data.option == 'logout'">
        <p>Are your sure you want to logout?</p>
 
-        <button mat-button class="add-btn" color="#228b18">Yes</button>
+        <button (click)="logout()" mat-button class="add-btn" color="#228b18">Yes</button>
 
-        <button mat-button class="add-btn" color="warn">Cancel</button>
+        <button (click)="closeDialog()" mat-button class="add-btn" color="warn">Cancel</button>
     </div>
+
+    <div *ngIf="data.option == 'checkout'">
+        <p>Are your sure you want to check out your items?</p>
+ 
+         <button (click)="logout()" mat-button class="add-btn" color="#228b18">Yes</button>
+ 
+         <button (click)="closeDialog()"  mat-button class="add-btn" color="warn">Cancel</button>
+     </div>
 </div>
 

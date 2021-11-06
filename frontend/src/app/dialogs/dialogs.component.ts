@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class DialogsComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogReg: MatDialogRef<DialogsComponent>, public  router: Router, private _ds: DataService, public _dialog: MatDialog,) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<DialogsComponent>, public  router: Router, private _ds: DataService, public _dialog: MatDialog,) { }
 
   ngOnInit(): void {
   }
@@ -41,6 +41,8 @@ export class DialogsComponent implements OnInit {
   logout(){
     window.sessionStorage.clear()
     this.router.navigate(['login']);
+    this._dialog.closeAll()
+    this.dialogRef.close();
   }
 
   cart_data: any = {}
@@ -57,6 +59,10 @@ export class DialogsComponent implements OnInit {
 
   closeDialog() {
     this._dialog.closeAll()
+    this.dialogRef.close();
   }
+
+
+
 
 }

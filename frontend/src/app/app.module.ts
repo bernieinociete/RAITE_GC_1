@@ -21,6 +21,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -46,9 +47,12 @@ import {MatIconModule} from '@angular/material/icon';
     MatMenuModule,
     MatDividerModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
