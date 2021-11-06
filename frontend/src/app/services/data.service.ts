@@ -32,4 +32,10 @@ export class DataService {
       this.http.post(this.baseUrl + method, JSON.stringify(data))
     )
   }
+
+  sendApiRequest2(method: any) {
+    return <any>(
+      this.http.get(this.baseUrl + method)
+    )
+  }
 }

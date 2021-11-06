@@ -82,9 +82,29 @@
 				break;
 				// PRODUCT
 
+				// CART
+				case 'cart':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
+				break;
+				// CART
+
+				// ORDER
+				case 'order':
+					if(count($req)>1){
+						echo json_encode($gm->exec_query($req[0], $req[1]));
+					} else {
+						echo json_encode($gm->exec_query($req[0], null));
+					}
+				break;
+				// ORDER
+
 				default:
-				http_response_code(400);
-				echo "Bad Request";
+					http_response_code(400);
+					echo "Invalid Route";
 				break;
 			}
 			break;
