@@ -3,6 +3,7 @@ import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angula
 import { Router } from '@angular/router';
 import { DialogsComponent } from '../dialogs/dialogs.component';
 import { DataService } from '../services/data.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { DataService } from '../services/data.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private _ds: DataService, private _router: Router) { }
+  constructor(public dialog: MatDialog, private _ds: DataService, private _router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +26,15 @@ export class LoginComponent implements OnInit {
     this._ds.sendApiRequest('login', this.user_data).subscribe((data: {payload: any}) =>{
       window.sessionStorage.setItem('user_id', data.payload.id)
       this._router.navigate(['/category'])
+
+      this._snackBar.open("Successfully logged in" , '', {
+        duration: 2000
+      });
+    },(er:any)=>{
+      this._snackBar.open("Wrong Credentials", '', {
+        duration: 2000
+      });
+
     })
   }
 

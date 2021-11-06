@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dialogs',
@@ -14,7 +15,7 @@ export class DialogsComponent implements OnInit {
   message: any
   private subs!: Subscription
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<DialogsComponent>, public  router: Router, private _ds: DataService, public _dialog: MatDialog,) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<DialogsComponent>, public  router: Router, private _ds: DataService, public _dialog: MatDialog, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.pullCart()
@@ -45,6 +46,14 @@ export class DialogsComponent implements OnInit {
     
     this._ds.sendApiRequest('register/', this.user_data).subscribe((data: {payload: any}) =>{
       this._dialog.closeAll()
+      this._snackBar.open("Registered successfully" , '', {
+        duration: 2000
+      });
+    },(er:any)=>{
+      this._snackBar.open("Please check all the fields", '', {
+        duration: 2000
+      });
+
     })
   }
 
@@ -88,8 +97,18 @@ export class DialogsComponent implements OnInit {
       this._ds.sendApiRequest('placeOrder/', this.order_info).subscribe((data: {payload:any []}) => {
         this.clearCart()
         this.sendMessage()
-      })
+
+        this._snackBar.open("Successfully check out. Please check your orders" , '', {
+          duration: 2000
+        });
+      },)
+    }else{
+      this._snackBar.open("Please check your cart" , '', {
+        duration: 2000
+      }
+      )
     }
+    
   }
 
   cart_clear: any = {}
@@ -102,6 +121,19 @@ export class DialogsComponent implements OnInit {
     })
   }
 
+  logout(){
+    window.sessionStorage.clear()
+    this.router.navigate(['login']);
+    this._dialog.closeAll()
+    this.dialogRef.close();
+
+    
+    this._snackBar.open("Successfully logged out" , '', {
+      duration: 2000
+    });
+
+  }
+
   cart_data: any = {}
   addToCart(product_id: any) {
     let id = window.sessionStorage.getItem('user_id')
@@ -112,6 +144,11 @@ export class DialogsComponent implements OnInit {
     this._ds.sendApiRequest('addToCart/', this.cart_data).subscribe((data: {payload: any}) =>{
       this._dialog.closeAll()
       this.sendMessage()
+
+      
+      this._snackBar.open("Added to cart" , '', {
+        duration: 2000
+      });
     })
   }
 
@@ -119,13 +156,5 @@ export class DialogsComponent implements OnInit {
     this._dialog.closeAll()
     this.dialogRef.close();
   }
-
-  logout(){
-    window.sessionStorage.clear()
-    this.router.navigate(['login']);
-    this._dialog.closeAll()
-    this.dialogRef.close();
-  }
-
 
 }

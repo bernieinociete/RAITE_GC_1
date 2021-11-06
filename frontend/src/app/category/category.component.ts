@@ -3,6 +3,7 @@ import { DialogsComponent } from '../dialogs/dialogs.component';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface PeriodicElement {
   name: string;
@@ -34,7 +35,7 @@ export class CategoryComponent implements OnInit {
   message: any
   private subs!: Subscription
 
-  constructor(private _ds: DataService, public dialog: MatDialog) { 
+  constructor(private _ds: DataService, public dialog: MatDialog, public _snackBar: MatSnackBar) { 
     this.subs = this._ds.getUpdate().subscribe(message => {
       this.message = this.message
       this.pullCart()
@@ -114,6 +115,9 @@ export class CategoryComponent implements OnInit {
     if(cart.cart_quantity < cart.product_quantity) {
       this._ds.sendApiRequest('editQuantity/' + cart.cart_id, this.cart_info).subscribe((data: {payload: any}) =>{
         this.sendMessage()
+
+        
+
       })
     }
   }
@@ -135,6 +139,10 @@ export class CategoryComponent implements OnInit {
 
     this._ds.sendApiRequest('editQuantity/' + cart.cart_id, this.cart_info).subscribe((data: {payload: any}) =>{
       this.sendMessage()
+
+      this._snackBar.open("Item Removed" , '', {
+        duration: 2000
+      });
     })
   }
   
