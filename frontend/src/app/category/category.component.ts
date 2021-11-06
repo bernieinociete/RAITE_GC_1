@@ -51,16 +51,17 @@ export class CategoryComponent implements OnInit {
     this.pullCart()
     this.pullOrder()
     this.pullProducts()
+    this.pullUser()
   }
 
-    ngOnDestroy() {
-      this.subs.unsubscribe()
-    }
+  ngOnDestroy() {
+    this.subs.unsubscribe()
+  }
 
 
-    sendMessage() {
-      this._ds.sendUpdate('Message Update!')
-    }
+  sendMessage() {
+    this._ds.sendUpdate('Message Update!')
+  }
 
   cart_data: any[] = []
   pullCart() {
@@ -81,6 +82,14 @@ export class CategoryComponent implements OnInit {
   pullProducts() {
     this._ds.sendApiRequest2('product/').subscribe((data: {payload: any}) => {
       this.product_data = data.payload
+    })
+  }
+
+  user_data: any[] = []
+  pullUser() {
+    let id = window.sessionStorage.getItem('user_id')
+    this._ds.sendApiRequest2('user/' + id).subscribe((data: {payload: any}) => {
+      this.user_data = data.payload
     })
   }
   

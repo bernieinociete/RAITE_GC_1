@@ -62,12 +62,12 @@
 
             <button mat-button class="checkout-btn" color="primary" (click)= "openDialog('edit', null)">Edit</button>
 
-            <mat-grid-list  cols="5" rowHeight="1:1">  
+            <mat-grid-list  cols="5" rowHeight="1:1" *ngFor="let user of user_data">  
                 <mat-grid-tile>
                     <mat-card class="categ">
     
                         <p><strong>Name</strong></p>
-                        <p>Juan Dela Cruz</p>
+                        <p>{{user.user_fname}} {{user.user_mname}} {{user.user_lname}}</p>
 
                     </mat-card>
                 </mat-grid-tile>
@@ -76,7 +76,7 @@
                     <mat-card class="categ">
     
                         <p><strong>Username</strong></p>
-                        <p>juandelacruz</p>
+                        <p>{{user.user_username}}</p>
 
                     </mat-card>
                 </mat-grid-tile>
@@ -85,7 +85,7 @@
                     <mat-card class="categ">
     
                         <p><strong>Address</strong></p>
-                        <p>West Tapinac, Olongapo City</p>
+                        <p>{{user.user_houseno}} {{user.user_street}} {{user.user_barangay}} {{user.user_city}}, {{user.user_province}} {{user.user_zipcode}}</p>
 
                     </mat-card>
                 </mat-grid-tile>
@@ -94,7 +94,7 @@
                     <mat-card class="categ">
     
                         <p><strong>Email Address</strong></p>
-                        <p>juandelacruz@gmail.com</p>
+                        <p>{{user.user_email}}</p>
 
                     </mat-card>
                 </mat-grid-tile>
@@ -103,7 +103,7 @@
                     <mat-card class="categ">
     
                         <p><strong>Contact Number</strong></p>
-                        <p>099999999999</p>
+                        <p>{{user.user_phone}}</p>
 
                     </mat-card>
                 </mat-grid-tile>
@@ -135,13 +135,18 @@
                 <!-- Weight Column -->
                 <ng-container matColumnDef="weight">
                   <th mat-header-cell *matHeaderCellDef> Date Order </th>
-                  <td mat-cell *matCellDef="let element"> {{element.order_createdAt}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.order_createdAt | date:'medium'}} </td>
                 </ng-container>
               
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="symbol">
                   <th mat-header-cell *matHeaderCellDef> Status </th>
-                  <td mat-cell *matCellDef="let element"> {{element.order_status}} </td>
+                  <td mat-cell *matCellDef="let element"> 
+                      <p *ngIf="element.order_status == 1">Pending</p>
+                      <p *ngIf="element.order_status == 2">For Delivery</p>
+                      <p *ngIf="element.order_status == 3">Deliverd</p>
+                      <p *ngIf="element.order_status == 0">Cancelled</p>
+                  </td>
                 </ng-container>
               
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
