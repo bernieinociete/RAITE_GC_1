@@ -12,6 +12,6 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  shouldRun = true;
+  selected = 'Fruit';
   
 }

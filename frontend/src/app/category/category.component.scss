@@ -5,11 +5,42 @@
 .logo{
     width: 100px;
     height: 100px;
+    margin: 20px;
+}
+
+.templogo{
+    width: 100px;
+    height: 100px;
 }
 
 .categ{
-    width: 100px;
-    height: 100px;
+    width: 30vw;
+    padding: 20px;
+    height: auto;
     background-color: #228b18;
     color: white;
+    margin: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+p {
+    font-size: 1.1em;
+}
+
+.menu-cat{
+    background-color: lightgray;
+    width: auto;
+    margin: 20px;
+}
+
+.category-label{
+    margin: 20px;
+    text-align: center;
+    color: #228b18;
+}
+
+.select-cat{
+    flex: 1 1 auto;
+    margin: 20px 10px;
 }
