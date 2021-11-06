@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DialogsComponent } from '../dialogs/dialogs.component';
 import { DataService } from '../services/data.service';
@@ -28,10 +28,17 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  openDialog(){
-    const dialogRef = this.dialog.open(DialogsComponent, {
-      width: '33%',
-    });
+  openDialog(option:any){
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      option: option
+    }
+    
+    dialogConfig.maxWidth = '33%';
+
+    const dialogRef = this.dialog.open(DialogsComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

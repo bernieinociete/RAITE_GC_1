@@ -1,6 +1,9 @@
 <div class="main-container">
     <div class="header">
         <img src="assets/templogo.png" class="templogo">
+
+        <button mat-button class="logout-btn" color="primary" (click) = "openDialog('logout')">Logout</button>
+
     </div>
 
     <mat-tab-group>
@@ -26,7 +29,7 @@
 
                 <mat-grid-list  cols="5" rowHeight="1:1">  
                     <mat-grid-tile *ngFor = "let items of [1,2,3,4,5,6] ">
-                        <mat-card class="categ">
+                        <mat-card (click)="openDialog('item')" class="categ">
                             <img src="assets/category/defaultproductphoto.png" class="logo">
                             <p>Product 1</p>
                         </mat-card>

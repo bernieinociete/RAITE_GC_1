@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -9,9 +9,10 @@ import { DataService } from '../services/data.service';
 })
 export class DialogsComponent implements OnInit {
 
-  constructor(private _ds: DataService, public _dialog: MatDialog,) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogReg: MatDialogRef<DialogsComponent>, private _ds: DataService, public _dialog: MatDialog,) { }
 
   ngOnInit(): void {
+
   }
 
   user_fname: any
