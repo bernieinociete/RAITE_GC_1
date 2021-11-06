@@ -40,9 +40,9 @@
 					echo json_encode($gm->update("tbl_cart", $d, "cart_id = $req[1]"));
 				break;
 
-				case 'removeCart':
+				case 'clearCart':
 					$d = json_decode(file_get_contents("php://input"));
-					echo json_encode($gm->update("tbl_cart", $d, "cart_id = $req[1]"));
+					echo json_encode($gm->update("tbl_cart", $d, "user_id = $req[1]"));
 				break;
 				// CART
 

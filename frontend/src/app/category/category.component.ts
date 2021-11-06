@@ -38,11 +38,13 @@ export class CategoryComponent implements OnInit {
     this.subs = this._ds.getUpdate().subscribe(message => {
       this.message = this.message
       this.pullCart()
+      this.pullOrder()
+      this.pullProducts()
     })
   }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  dataSource: any = [];
   
   ngOnInit(): void {
     this.pullCart()
@@ -50,27 +52,27 @@ export class CategoryComponent implements OnInit {
     this.pullProducts()
   }
 
-  ngOnDestroy() {
-    this.subs.unsubscribe()
-  }
+    ngOnDestroy() {
+      this.subs.unsubscribe()
+    }
 
 
-  sendMessage() {
-    this._ds.sendUpdate('Message Update!')
-  }
+    sendMessage() {
+      this._ds.sendUpdate('Message Update!')
+    }
 
   cart_data: any[] = []
   pullCart() {
     let id = window.sessionStorage.getItem('user_id')
     this._ds.sendApiRequest2('cart/' + id).subscribe((data: {payload: any}) => {
       this.cart_data = data.payload
-      console.log(this.cart_data)
     })
   }
 
   pullOrder() {
     let id = window.sessionStorage.getItem('user_id')
     this._ds.sendApiRequest2('order/' + id).subscribe((data: {payload: any}) => {
+      this.dataSource = data.payload
     })
   }
   
@@ -126,7 +128,6 @@ export class CategoryComponent implements OnInit {
       this.sendMessage()
     })
   }
-  
   
   openDialog(option:any, product: any){
 
