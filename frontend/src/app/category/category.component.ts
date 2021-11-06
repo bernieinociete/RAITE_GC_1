@@ -138,6 +138,7 @@ export class CategoryComponent implements OnInit {
     }
     
     dialogConfig.maxWidth = '33%';
+    
 
     const dialogRef = this.dialog.open(DialogsComponent, dialogConfig);
 

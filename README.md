@@ -64,8 +64,7 @@ Navigate to `http://localhost:4200/`. The app will automatically reload if you c
 
 ## Credentials
 
-username: administrator
-password: admin123!
+Register your own account
 
 ## Further help
 
