@@ -20,6 +20,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatGridListModule,
     MatMenuModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
 
   ],
   providers: [],

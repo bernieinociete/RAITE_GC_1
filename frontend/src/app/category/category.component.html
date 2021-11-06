@@ -33,9 +33,7 @@
                             <img src="assets/category/defaultproductphoto.png" class="logo">
                             <p>Product 1</p>
 
-                            <button mat-button class="add-btn" color="#228b18">Yes</button>
-
-                            <button mat-button class="add-btn" color="warn">Cancel</button>
+                            
                         </mat-card>
                     </mat-grid-tile>
                 </mat-grid-list>
@@ -44,10 +42,16 @@
         <mat-tab label="Cart">
             <mat-grid-list  cols="5" rowHeight="1:1">  
                 <mat-grid-tile *ngFor = "let items of [1,2,3,4,5,6] ">
-                    <mat-card (click)="openDialog('item')" class="categ">
+                    <mat-card class="categ">
                         <img src="assets/category/defaultproductphoto.png" class="logo">
                         <p><strong>Product 1</strong></p>
                         <p>Quantity | Total Price</p>
+
+                        <button mat-button class="add-btn" color="white">	<mat-icon>add</mat-icon></button>
+
+                        <button mat-button class="add-btn" color="white"><mat-icon>remove</mat-icon></button>
+
+                        <button mat-button class="add-btn" color="warn"><mat-icon>delete</mat-icon></button>
                     </mat-card>
                 </mat-grid-tile>
             </mat-grid-list>
